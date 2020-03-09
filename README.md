@@ -1,4 +1,4 @@
-#Developer recruitment task - Golang
+# Developer recruitment task - Golang
 
 ## HOWTO
 API_KEY="openweathermap api key" go run main.go
@@ -6,7 +6,7 @@ http://localhost:8080/weather/city/?cities=London,Warsaw
 
 You can change the localhost port number by modifying the config/config.json file
 
-##Description
+## Description
 
 Let’s say GogoApps is building a small application enabling users to retrieve information
 about the weather in the places of their choosing. Your task is creating a microservice
