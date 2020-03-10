@@ -2,6 +2,8 @@ package client
 
 import (
 	"errors"
+	"github.com/dominik-najberg/RG9taW5pa05hamJlcmdyZWNydWl0bWVudCB0YXNr/mocks"
+	"github.com/stretchr/testify/mock"
 	"reflect"
 	"testing"
 )
@@ -9,15 +11,6 @@ import (
 const (
 	CorrectLoadLondon = `{"coord":{"lon":-0.13,"lat":51.51},"weather":[{"id":500,"main":"Rain","description":"light rain","icon":"10n"}],"base":"stations","main":{"temp":280.39,"feels_like":274.97,"temp_min":279.15,"temp_max":281.48,"pressure":1010,"humidity":87},"visibility":10000,"wind":{"speed":6.2,"deg":200},"rain":{"1h":0.76},"clouds":{"all":75},"dt":1583783703,"sys":{"type":1,"id":1414,"country":"GB","sunrise":1583735250,"sunset":1583776480},"timezone":0,"id":2643743,"name":"London","cod":200}`
 )
-
-type fetcherMock struct {
-	Response string
-	Err      error
-}
-
-func (f *fetcherMock) Fetch(_ string) (string, error) {
-	return f.Response, f.Err
-}
 
 func TestAPIClient_GetWeatherByCityName(t *testing.T) {
 	tests := []struct {
@@ -52,11 +45,9 @@ func TestAPIClient_GetWeatherByCityName(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			fm := fetcherMock{
-				Response: tt.fmResponse,
-				Err:      tt.fmError,
-			}
-			c := NewAPIClient("test-key",fm.Fetch)
+			fm := mocks.FetcherMock{}
+			fm.On("Fetch", mock.Anything).Return(tt.fmResponse, tt.fmError)
+			c := NewAPIClient("test-key", fm.Fetch)
 			got, err := c.GetWeatherByCityName("city")
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetWeatherByCityName() error = %v, wantErr %v", err, tt.wantErr)

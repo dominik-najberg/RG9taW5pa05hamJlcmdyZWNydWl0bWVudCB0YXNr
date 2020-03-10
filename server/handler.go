@@ -10,18 +10,22 @@ import (
 )
 
 type handlers struct {
-	fetcher client.Fetcher
-	appID   string
+	fetcher    client.Fetcher
+	appID      string
+	displayEng DisplayEng
 }
 
-func newHandlers(f client.Fetcher) *handlers {
+type DisplayEng func(writer http.ResponseWriter, resources []*client.OpenWeatherMapResponse)
+
+func NewHandlers(f client.Fetcher, d DisplayEng) *handlers {
 	appID := os.Getenv("API_KEY")
 	if appID == "" {
 		log.Fatalf("API_KEY misssing from ENV variables")
 	}
 	return &handlers{
-		fetcher: f,
-		appID:   appID,
+		fetcher:    f,
+		appID:      appID,
+		displayEng: d,
 	}
 }
 
@@ -48,9 +52,13 @@ func (h *handlers) weatherByCitiesViewHandler(writer http.ResponseWriter, r *htt
 		resources = append(resources, res)
 	}
 
+	h.displayEng(writer, resources)
+}
+
+func HtmlDisplay(writer http.ResponseWriter, resources []*client.OpenWeatherMapResponse) {
 	html, err := template.ParseFiles("server/template/bootstrap.html")
 	if err != nil {
-		log.Fatalf("error while parsing template: %v", err)
+		log.Fatalf("error while opening template: %v", err)
 	}
 	err = html.Execute(writer, struct {
 		Cities []*client.OpenWeatherMapResponse

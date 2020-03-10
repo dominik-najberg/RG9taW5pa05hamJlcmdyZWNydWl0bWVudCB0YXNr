@@ -12,7 +12,7 @@ import (
 )
 
 func NewApiServer(port int) *http.Server {
-	h := newHandlers(Cache()(client.HttpGetFetcher))
+	h := NewHandlers(Cache()(client.HttpGetFetcher), HtmlDisplay)
 	http.HandleFunc("/weather/city/", h.weatherByCitiesViewHandler)
 
 	return &http.Server{
