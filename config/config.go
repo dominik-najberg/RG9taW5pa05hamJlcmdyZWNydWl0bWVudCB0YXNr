@@ -9,7 +9,7 @@ import (
 var AppConfig Configuration
 
 type Configuration struct {
-	ServerPort int  `json:"local_port"`
+	ServerPort int `json:"local_port"`
 }
 
 func ReadConfig(filename string) {

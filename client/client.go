@@ -58,17 +58,16 @@ type OpenWeatherMapResponse struct {
 
 type APIClient struct {
 	apiKey string
-	Fetch Fetcher
+	Fetch  Fetcher
 }
 
 type Fetcher func(string) (string, error)
 type Adapter func(fetcherFunc Fetcher) Fetcher
 
-
 func NewAPIClient(apiKey string, fetcher Fetcher) *APIClient {
 	return &APIClient{
 		apiKey: apiKey,
-		Fetch: fetcher,
+		Fetch:  fetcher,
 	}
 }
 
