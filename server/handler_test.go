@@ -56,14 +56,8 @@ func Test_handlers_weatherByCitiesViewHandler(t *testing.T) {
 			fetcher := mocks.FetcherMock{}
 			fetcher.On("Fetch", mock.Anything).Return(tt.fmResponse, tt.fmError)
 
-			h := handlers{
-				fetcher:    fetcher.Fetch,
-				appID:      appID,
-				displayEng: det.DisplayEngineFunc,
-			}
-
+			h := NewHandlers(fetcher.Fetch, det.DisplayEngineFunc, appID)
 			det.expected = tt.want
-
 			h.weatherByCitiesViewHandler(rw, req)
 		})
 	}

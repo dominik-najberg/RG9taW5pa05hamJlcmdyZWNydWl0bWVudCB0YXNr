@@ -12,7 +12,12 @@ import (
 )
 
 func NewApiServer(port int) *http.Server {
-	h := NewHandlers(Cache()(client.HttpGetFetcher), HtmlDisplay)
+	appID := os.Getenv("API_KEY")
+	if appID == "" {
+		log.Fatalf("API_KEY misssing from ENV variables")
+	}
+
+	h := NewHandlers(Cache()(client.HttpGetFetcher), HtmlDisplay, appID)
 	http.HandleFunc("/weather/city/", h.weatherByCitiesViewHandler)
 
 	return &http.Server{
