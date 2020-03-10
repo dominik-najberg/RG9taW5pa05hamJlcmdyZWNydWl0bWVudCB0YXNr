@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"fmt"
-	"github.com/dominik-najberg/gogoapps/client"
+	"github.com/dominik-najberg/RG9taW5pa05hamJlcmdyZWNydWl0bWVudCB0YXNr/client"
 	"log"
 	"net/http"
 	"os"

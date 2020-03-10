@@ -2,7 +2,7 @@ package server
 
 import (
 	"encoding/json"
-	"github.com/dominik-najberg/gogoapps/client"
+	"github.com/dominik-najberg/RG9taW5pa05hamJlcmdyZWNydWl0bWVudCB0YXNr/client"
 	"github.com/patrickmn/go-cache"
 	"log"
 	"strings"

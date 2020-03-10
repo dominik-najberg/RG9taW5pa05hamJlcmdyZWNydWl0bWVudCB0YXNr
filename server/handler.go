@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/dominik-najberg/gogoapps/client"
+	"github.com/dominik-najberg/RG9taW5pa05hamJlcmdyZWNydWl0bWVudCB0YXNr/client"
 	"html/template"
 	"log"
 	"net/http"
@@ -11,17 +11,17 @@ import (
 
 type handlers struct {
 	fetcher client.Fetcher
-	appID string
+	appID   string
 }
 
 func newHandlers(f client.Fetcher) *handlers {
 	appID := os.Getenv("API_KEY")
-	if appID == ""{
+	if appID == "" {
 		log.Fatalf("API_KEY misssing from ENV variables")
 	}
 	return &handlers{
 		fetcher: f,
-		appID: appID,
+		appID:   appID,
 	}
 }
 
@@ -48,12 +48,13 @@ func (h *handlers) weatherByCitiesViewHandler(writer http.ResponseWriter, r *htt
 		resources = append(resources, res)
 	}
 
-
 	html, err := template.ParseFiles("server/template/bootstrap.html")
 	if err != nil {
 		log.Fatalf("error while parsing template: %v", err)
 	}
-	err = html.Execute(writer, struct{Cities []*client.OpenWeatherMapResponse}{Cities:resources})
+	err = html.Execute(writer, struct {
+		Cities []*client.OpenWeatherMapResponse
+	}{Cities: resources})
 	if err != nil {
 		log.Fatalf("error while parsing template: %v", err)
 	}

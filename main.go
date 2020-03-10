@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/dominik-najberg/gogoapps/config"
-	"github.com/dominik-najberg/gogoapps/internal"
-	"github.com/dominik-najberg/gogoapps/server"
+	"github.com/dominik-najberg/RG9taW5pa05hamJlcmdyZWNydWl0bWVudCB0YXNr/config"
+	"github.com/dominik-najberg/RG9taW5pa05hamJlcmdyZWNydWl0bWVudCB0YXNr/internal"
+	"github.com/dominik-najberg/RG9taW5pa05hamJlcmdyZWNydWl0bWVudCB0YXNr/server"
 	"log"
 	"os"
 )
@@ -26,5 +26,3 @@ func main() {
 	server.Start(config.AppConfig.ServerPort)
 	log.Println("apiServer stopped")
 }
-
-
