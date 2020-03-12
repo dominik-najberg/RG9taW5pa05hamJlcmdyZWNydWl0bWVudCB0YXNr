@@ -3,6 +3,7 @@
 ## HOWTO
 API_KEY="openweathermap api key" go run main.go
 http://localhost:8080/weather/city/?cities=London,Warsaw
+http://localhost:8080/weather/city/?cities=London,NonExistent
 
 You can change the localhost port number by modifying the config/config.json file
 
