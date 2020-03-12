@@ -1,11 +1,13 @@
 # Developer recruitment task - Golang
 
 ## HOWTO
-API_KEY="openweathermap api key" go run main.go
+API_KEY="7bab2e1b260a40b13221b47e3a411215" go run main.go
 http://localhost:8080/weather/city/?cities=London,Warsaw
 http://localhost:8080/weather/city/?cities=London,NonExistent
 
 You can change the localhost port number by modifying the config/config.json file
+
+Working further on the task I would wrap errors if need be.
 
 ## Description
 
